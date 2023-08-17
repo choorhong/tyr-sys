@@ -7,4 +7,4 @@ const numberOfUser = askQuestion();
 const distrbutedCards = distributeCard(numberOfUser);
 
 // Logging the results
-printResult(distrbutedCards);
+printResult(distrbutedCards, numberOfUser);

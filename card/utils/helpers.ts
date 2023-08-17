@@ -1,6 +1,7 @@
 import promptSync from "prompt-sync";
 const prompt = promptSync();
 
+const maxNumOfCards = 13 * 4;
 /**
  *
  * @returns a deck of cards in an array, 52 in total.
@@ -86,7 +87,8 @@ export const askQuestion = () => {
  * @returns list of empty array
  */
 export const generateUserArray = (numberOfUser: number) => {
-  return Array.from({ length: numberOfUser }, (_, _index) => []);
+  const length = Math.min(numberOfUser, maxNumOfCards);
+  return Array.from({ length }, (_, _index) => []);
 };
 
 /**
@@ -122,8 +124,9 @@ export const distributeCard = (numberOfUser: number) => {
 /**
  *
  * @param {string[][]} dc list of array of distributed cards
+ * @param {number} userInput number of users
  */
-export const printResult = (dc: string[][]) => {
+export const printResult = (dc: string[][], userInput?: number) => {
   dc.forEach((el, index) => {
     console.log(
       `User ${index + 1} receives: ${el}. Number of card(s) received: ${
@@ -131,4 +134,13 @@ export const printResult = (dc: string[][]) => {
       }`
     );
   });
+  if (userInput && userInput > maxNumOfCards) {
+    if (userInput - maxNumOfCards === 1) {
+      console.log("Sadly, user 53 will not receive any card");
+    } else {
+      console.log(
+        `Sadly, user 53 to user ${userInput} will not receive any card`
+      );
+    }
+  }
 };
