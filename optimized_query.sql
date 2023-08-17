@@ -38,7 +38,7 @@
 -- ps: Table with a suffix indicates table with one-to-one (11) or one-to-many (1M) relationship with jobs (main table)
 
 -----------------------------------------------------------------------------
--------------------- SETION 3: IMPROVEMENT SUGGESTION -----------------------
+-------------- SETION 3: IMPROVEMENT SUGGESTION (IN POSTGRES)----------------
 
 -- Construct a CTE for 'jobs' table named FilteredJobs with combination from its one-to-one or one-to-many constraints column
 -- and filtered conditions in WHERE clause
