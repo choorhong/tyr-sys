@@ -1,0 +1,22 @@
+{
+  "name": "tyr-sys-ques",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "card": "ts-node -r tsconfig-paths/register index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "@types/prompt-sync": "^4.2.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
