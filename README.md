@@ -21,7 +21,7 @@ This project contains 3 main parts, they are:
 - Run the `start` script in `package.json` or simply execute `npm start`.
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-3. `optimized_query.sql`` contains the explanations for SQL query improvements.
+3. `optimized_query.sql` contains the explanations for SQL query improvements.
 
 - Please note that proposed solutions in section 3 are tested & benchmarked in postgres environment.
 - Please refer to section 4 for mysql. Unfortunately, this solution has not been tested.
