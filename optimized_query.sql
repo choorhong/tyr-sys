@@ -1,6 +1,6 @@
 ----------------------- SETION 1: PROPSED SOLUTIONS -------------------------
 
--- Below are some of the solutions to improve query performance and/or codes readabilty for future maintenance, they might include the following: 
+-- Below are some of the solutions to improve query performance and/or codes readabilty for future maintenance, they are: 
 
 -- Indexes: Ensure that the columns used in JOIN conditions and WHERE clauses are properly indexed. Indexes can significantly improve query performance by allowing the database to quickly locate relevant rows.
 -- Query Rewriting: Rewrite the query to avoid repeated patterns. Commom patterns are common table expression (CTE), temp table, and subquery to simplify parts of the query.
@@ -28,7 +28,7 @@
 -- Table 7b: JobsBasicAbilities (junction table between table 1 & 6)
 -- Table 8: affiliates 
 -- Table 9b: JobTools (junction table between table 1 & 8 affiliate.types = 1 as Tools)
--- Table 10b: JobsCareerPaths (junction table between table 1 & 8 affiliate.types = 3 as CareerPaths)
+-- Table 10b: JobsCareerPaths (junction table between table 1 & 8 affiliate.types = 2 as CareerPaths)
 -- Table 11b:JobsRecQualifications (junction table between table 1 & 8 affiliate.types = 3 as RecQualifications)
 -- Table 12b: JobsReqQualifications (junction table between table 1 & 8 affiliate.types = 3 as ReqQualifications)
 -- Table 13a: JobCategories (1M - JobCategories.id = Jobs.job_category_id)
