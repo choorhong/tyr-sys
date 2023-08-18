@@ -120,3 +120,92 @@ ORDER BY
     fj.id DESC
 LIMIT 50 OFFSET 0;
 
+-----------------------------------------------------------------------------
+-------------- SETION 4: IMPROVEMENT SUGGESTION (IN MYSQL)----------------
+
+-- Create the temporary table for FilteredJobs
+CREATE TEMPORARY TABLE FilteredJobs AS (
+    SELECT 
+        j.*,
+        jc.id AS JobCategories__id,
+        jc.name AS JobCategories__name,
+        jc.sort_order AS JobCategories__sort_order,
+        jc.created_by AS JobCategories__created_by,
+        jc.created AS JobCategories__created,
+        jc.modified AS JobCategories__modified,
+        jc.deleted AS JobCategories__deleted,
+        jt.id AS JobTypes__id,
+        jt.name AS JobTypes__name,
+        jt.job_category_id AS JobTypes__job_category_id,
+        jt.sort_order AS JobTypes__sort_order,
+        jt.created_by AS JobTypes__created_by,
+        jt.created AS JobTypes__created,
+        jt.modified AS JobTypes__modified,
+        jt.deleted AS JobTypes__deleted
+    FROM 
+        jobs j
+        JOIN job_categories jc ON j.job_category_id = jc.id AND jc.deleted IS NULL
+        JOIN job_types jt ON j.job_type_id = jt.id AND jt.deleted IS NULL
+    WHERE
+        CONCAT(j.name, description, detail, business_skill, knowledge,
+        location, activity, salary_statistic_group, salary_range_remarks,
+        restriction, remarks) LIKE '%キャビンアテンダント%'
+        AND publish_status = TRUE
+        AND j.deleted IS NULL
+);
+
+-- Create the temporary table for RelatedData
+CREATE TEMPORARY TABLE RelatedData AS (
+    SELECT
+        jp.job_id,
+        GROUP_CONCAT(DISTINCT p.name SEPARATOR ', ') AS personality_names, 
+        GROUP_CONCAT(DISTINCT ps.name SEPARATOR ', ') AS practical_skill_names,
+        GROUP_CONCAT(DISTINCT ba.name SEPARATOR ', ') AS basic_ability_names,
+        GROUP_CONCAT(DISTINCT t.name SEPARATOR ', ') AS tool_names,
+        GROUP_CONCAT(DISTINCT cp.name SEPARATOR ', ') AS career_path_names,
+        GROUP_CONCAT(DISTINCT rc.name SEPARATOR ', ') AS rec_qualification_names,
+        GROUP_CONCAT(DISTINCT rq.name SEPARATOR ', ') AS req_qualification_names
+    FROM
+        jobs_personalities jp
+        LEFT JOIN personalities p ON jp.personality_id = p.id AND p.deleted IS NULL
+        
+        LEFT JOIN jobs_practical_skills jps ON jp.job_id = jps.job_id
+        LEFT JOIN practical_skills ps ON jps.practical_skill_id = ps.id AND ps.deleted IS NULL
+        
+        LEFT JOIN jobs_basic_abilities jba ON jp.job_id = jba.job_id
+        LEFT JOIN basic_abilities ba ON jba.basic_ability_id = ba.id AND ba.deleted IS NULL
+        
+        LEFT JOIN jobs_tools jt ON jp.job_id = jt.job_id
+        LEFT JOIN affiliates t ON jt.affiliate_id = t.id AND t.type = 1 AND t.deleted IS NULL
+        
+        LEFT JOIN jobs_career_paths jcp ON jp.job_id = jcp.job_id
+        LEFT JOIN affiliates cp ON jcp.affiliate_id = cp.id AND cp.type = 3 AND cp.deleted IS NULL
+        
+        LEFT JOIN jobs_rec_qualifications jcq ON jp.job_id = jcq.job_id
+        LEFT JOIN affiliates rc ON jcq.affiliate_id = rc.id AND rc.type = 2 AND rc.deleted IS NULL
+        
+        LEFT JOIN jobs_req_qualifications jqq ON jp.job_id = jqq.job_id
+        LEFT JOIN affiliates rq ON jqq.affiliate_id = rq.id AND rq.type = 2 AND rq.deleted IS NULL
+    WHERE jp.job_id IN (SELECT id FROM FilteredJobs)
+    GROUP BY jp.job_id
+);
+
+-- Final query combining both temporary tables
+SELECT
+    fj.*,
+    rd.personality_names,
+    rd.practical_skill_names,
+    rd.basic_ability_names,
+    rd.tool_names,
+    rd.career_path_names,
+    rd.rec_qualification_names,
+    rd.req_qualification_names
+FROM
+    FilteredJobs fj
+    LEFT JOIN RelatedData rd ON fj.id = rd.job_id
+ORDER BY
+    fj.sort_order DESC,
+    fj.id DESC
+LIMIT 50 OFFSET 0;
+
+-- p.s The query is rewritten using tmporary table as MySQL doesn't support CTE prior to version 8.0.
