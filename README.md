@@ -33,7 +33,7 @@ This project contains 3 main parts, they are:
 - Run the `start` script in `package.json` or simply execute `npm start`.
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-# A. SQL Improvement Logic Test
+# B. SQL Improvement Logic Test
 
 `optimized_query.sql` contains the explanations for SQL query improvements.
 
