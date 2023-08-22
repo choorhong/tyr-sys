@@ -24,7 +24,7 @@ CMD [ "npm", "start" ]
 # docker run
 #     - it \ // interactive mode
 #     -- name react_card_container \
-#     -p 3000:3000 \ // externally connect port 4000 to local container react port 3000
+#     -p 3000:3000 \ // externally connect port 3000 to local container react port 3000
 #     -- rm \ // automatically remove the container when it shuts down
 #     -d \ // start up the container in detached mood
 #     react_card:1.0.0 \
