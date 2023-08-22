@@ -1,33 +1,39 @@
 FROM node:18-alpine
 
-WORKDIR /app/card-react
+WORKDIR /app/card
 
+# Copy installable dependecies json files
 COPY package*.json .
 
+# Install dependencies
 RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+ARG DEFAULT_PORT=80
+ENV PORT=${DEFAULT_PORT}
+EXPOSE ${PORT}
 
-CMD [ "npm", "start" ]
+# Start the application
+CMD ["npm", "run", "dev"]
 
 # -------------------->>>>>>>>>>>>--------------------------
 # DOCKER IMAGE INSTRUCTION
 # ----------------------------------------------------------
-# docker build --tag react_card:1.0.0 .
+# docker build \ 
+# --build-arg DEFAULT_PORT=80 (Default to 80) // optional flag
+# -t node_card:1.0.0 . 
 # -------------------->>>>>>>>>>>>--------------------------
 
 # -------------------->>>>>>>>>>>>--------------------------
 # DOCKER CONTAINER INSTRUCTION
 # ----------------------------------------------------------
 # docker run
-#     -it \ // interactive mode, mandatory flags for react containerization
-#     --name react_card_container \
-#     -p 4000:3000 \ // externally connect port 3000 to local container react port 3000
-#     --rm \ // optional flag to automatically remove the container when it shuts down
+#     --name node_card_container \
+#     -p 80:80 \ // externally connect port 80 to local container port 80
+#     --rm \ // optional flag to automatically remove the container when it shus down
 #     -d \ // optional flag to start up the container in detached mood
-#     react_card:1.0.0 \
+#     node_card:1.0.0 \
 # -------------------->>>>>>>>>>>>--------------------------
 
 # -------------------->>>>>>>>>>>>--------------------------

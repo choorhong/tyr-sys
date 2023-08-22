@@ -1,12 +1,19 @@
 version: "3.8"
 services:
+  node_card_container:
+    build:
+      context: ./card
+      dockerfile: Dockerfile
+      args:
+        DEFAULT_PORT: 80
+    ports:
+      - "80:80"
+
   react_card_container:
     build: ./card-react
-    # build:
-    #   context: ./card-react
-    #   dockerfile: Dockerfile
-
     ports:
       - "3000:3000"
     stdin_open: true
     tty: true
+    depends_on:
+      - node_card_container
