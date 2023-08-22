@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Form from "./component/Form";
 import { distributeCard } from "./utils/helper";
@@ -7,10 +7,27 @@ function App() {
   const [cards, setCards] = useState<string[][]>();
   const [disabledBtn, setDisabledBtn] = useState<boolean>();
 
-  const handleDisplayCards = (num: number) => {
-    const result = distributeCard(num);
-    setCards(result);
-    setDisabledBtn(true);
+  const handleDisplayCards = async (num: number) => {
+    let result = distributeCard(num);
+    try {
+      const response = await fetch("http://localhost/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          numberOfUser: num,
+        }),
+      });
+      if (response.ok) {
+        result = await response.json();
+      }
+      setCards(result);
+      setDisabledBtn(true);
+    } catch (error) {
+      setCards(result);
+    }
   };
 
   const restart = () => {
