@@ -60,7 +60,7 @@ export const shuffle = (a: string[]) => {
  * @param numberOfUser number of user
  * @returns boolean. True if validation fails
  */
-const validateAnswer = (numberOfUser: any) => {
+export const validateAnswer = (numberOfUser: any) => {
   return !numberOfUser || isNaN(numberOfUser) || parseInt(numberOfUser) <= 0;
 };
 

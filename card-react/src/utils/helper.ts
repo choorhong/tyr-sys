@@ -54,16 +54,25 @@ export const shuffle = (a: string[]) => {
 };
 
 /**
+ *
+ * @param numberOfUser number of user
+ * @returns boolean. True if validation fails
+ */
+export const validateAnswer = (numberOfUser: any) => {
+  return !numberOfUser || isNaN(numberOfUser) || parseInt(numberOfUser) <= 0;
+};
+
+/**
  * Ask the number of users to receive cards
  * @returns positive non-float number
  */
 export const askQuestion = () => {
   let numberOfUser: any;
 
-  while (!numberOfUser || isNaN(numberOfUser) || parseInt(numberOfUser) <= 0) {
+  while (validateAnswer(numberOfUser)) {
     numberOfUser = prompt("Please input the number of user: ");
 
-    if (!numberOfUser || isNaN(numberOfUser) || parseInt(numberOfUser) <= 0) {
+    if (validateAnswer(numberOfUser)) {
       console.log("Invalid value, please try again!");
     }
   }
