@@ -11,34 +11,3 @@ COPY . .
 EXPOSE 3000
 
 CMD [ "npm", "start" ]
-
-# -------------------->>>>>>>>>>>>--------------------------
-# DOCKER IMAGE INSTRUCTION
-# ----------------------------------------------------------
-# docker build --tag react_card:1.0.0 .
-# -------------------->>>>>>>>>>>>--------------------------
-
-# -------------------->>>>>>>>>>>>--------------------------
-# DOCKER CONTAINER INSTRUCTION
-# ----------------------------------------------------------
-# docker run
-#     -it \ // interactive mode, mandatory flags for react containerization
-#     --name react_card_container \
-#     -p 4000:3000 \ // externally connect port 3000 to local container react port 3000
-#     --rm \ // optional flag to automatically remove the container when it shuts down
-#     -d \ // optional flag to start up the container in detached mood
-#     react_card:1.0.0 \
-# -------------------->>>>>>>>>>>>--------------------------
-
-# -------------------->>>>>>>>>>>>--------------------------
-# DOCKER CONTAINER START/RESTART INSTRUCTION
-# ----------------------------------------------------------
-# docker start / restart \ ONLY IF --rm flag is not passed during initial container creation 
-#     - start - command to start a stopped container. 
-#     - restart - command to first stop a running container and then a start. If the container is already stopped, it is functionally the same as docker start.
-#     - i \ // interactive mode, mandatory flags for react containerization
-#     
-#     -p 4000:3000 \ // no longer needed as it is memoized
-#     -t \ // no longer needed as it is memoized
-#     -d \ // this flag is no available for restart or start command. Hence, start/restart will automatically result in attached mode
-# -------------------->>>>>>>>>>>>--------------------------
