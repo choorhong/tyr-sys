@@ -8,15 +8,17 @@ This project contains 3 main parts, they are:
 - `card-react` folder
 - optimized_query.sql
 
-# Run the project with docker-compose (recommended way):
+# A. Programming Test
 
-- Run `docker-compose up -d`
+**Run the project with docker-compose (recommended):**
+
+- Run `docker-compose up -d` in the terminal.
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser (react frontend).
 - Backend is available to be tested on http default port 80 [http://localhost](http://localhost).
   - `GET` request
   - `POST` request with JSON body `{ "numberOfUser": <any_number> }`
 
-# Run the projects individually:
+**Run the project individually:**
 
 1. To run the `card` project individually, please follow the step below:
 
@@ -31,7 +33,9 @@ This project contains 3 main parts, they are:
 - Run the `start` script in `package.json` or simply execute `npm start`.
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## `optimized_query.sql` contains the explanations for SQL query improvements.
+# A. SQL Improvement Logic Test
+
+`optimized_query.sql` contains the explanations for SQL query improvements.
 
 - Please note that proposed solutions in section 3 are tested & benchmarked in postgres environment.
 - Please refer to section 4 for mysql. Unfortunately, this solution has not been tested.
