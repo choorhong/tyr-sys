@@ -8,7 +8,7 @@ This project contains 3 main parts, they are:
 - `card-react` folder
 - optimized_query.sql
 
-# Recommended way to experience the project:
+# Run the project with docker-compose (recommended way):
 
 - Run `docker-compose up -d`
 - Open [http://localhost:3000](http://localhost:3000) to view it in the browser (react frontend).
@@ -16,7 +16,7 @@ This project contains 3 main parts, they are:
   - `GET` request
   - `POST` request with JSON body `{ "numberOfUser": <any_number> }`
 
-### Run the projects individually:
+# Run the projects individually:
 
 1. To run the `card` project individually, please follow the step below:
 
